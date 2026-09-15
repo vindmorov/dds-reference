@@ -45,6 +45,9 @@ interface DropdownProps {
   searchPlaceholder?: string;
   /** Колбэк при изменении поискового запроса */
   onSearchChange?: (q: string) => void;
+  /** Оставляет список открытым после выбора пункта
+   * @default true */
+  closeOnSelect?: boolean;
   /** Показывает спиннер в попапе
    * @default false */
   isLoading?: boolean;
@@ -77,6 +80,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
     hasSearch = false,
     searchPlaceholder = 'Поиск',
     onSearchChange,
+    closeOnSelect = true,
     isLoading = false,
     isEmpty = false,
     emptyText = 'Ничего не найдено',
@@ -164,6 +168,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
                 hasSearch={hasSearch}
                 searchPlaceholder={searchPlaceholder}
                 onSearchChange={onSearchChange}
+                closeOnSelect={closeOnSelect}
                 isLoading={isLoading}
                 isEmpty={isEmpty}
                 emptyText={emptyText}

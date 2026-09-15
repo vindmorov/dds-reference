@@ -1,6 +1,6 @@
 import { ArrowRight, Copy, Send, ThumbsDown, ThumbsUp, X } from 'lucide-react';
 import { PageAction } from '../../../vendor/t-ds/src';
-import { DocumentListAcsMagnifier, FileListShortReverseAcsPencil, DocumentListAcsPlus, WatchTimer, CheckmarkCircle } from '../../../vendor/t-ds/src/assets/Icon/24/Stroked';
+import { WatchTimer, CheckmarkCircle } from '../../../vendor/t-ds/src/assets/Icon/24/Stroked';
 import { AIInsight, FinanceRow, formatCurrency, getCategoryName } from '../data/financeData';
 
 interface DetailsDrawerTDSProps { isOpen: boolean; insight: AIInsight | null; relatedRows: FinanceRow[]; onClose: () => void; onNavigateToRow: (rowId: string) => void; onAction?: (action: 'review' | 'plan' | 'article' | 'snooze' | 'resolve') => void; }
@@ -28,7 +28,7 @@ export function DetailsDrawerTDS({ isOpen, insight, relatedRows, onClose, onNavi
         <div className="insight-recommendations">{recommendations.map((recommendation, index) => <button type="button" key={index} onClick={() => relatedRows[index] && onNavigateToRow(relatedRows[index].id)}><span>{recommendation}</span><ArrowRight /></button>)}</div>
         <h4 className="related-title">Связанные категории:</h4>
         <div className="insight-related-rows">{relatedRows.map(row => <button type="button" key={row.id} onClick={() => onNavigateToRow(row.id)}><span><small>{getCategoryName(row.category)}</small>{row.name}</span><strong>{formatCurrency(row.total)}</strong></button>)}</div>
-        <div className="insight-action-list"><PageAction title="Проверить операции" leftAccessory={<DocumentListAcsMagnifier className="insight-action-icon" />} onClick={() => onAction?.('review')} /><PageAction title="Изменить план" leftAccessory={<FileListShortReverseAcsPencil className="insight-action-icon" />} onClick={() => onAction?.('plan')} /><PageAction title="Добавить статью" leftAccessory={<DocumentListAcsPlus className="insight-action-icon" />} onClick={() => onAction?.('article')} /><PageAction title="Отложить инсайт" leftAccessory={<WatchTimer className="insight-action-icon" />} onClick={() => onAction?.('snooze')} /><PageAction title="Отметить решённым" leftAccessory={<CheckmarkCircle className="insight-action-icon" />} onClick={() => onAction?.('resolve')} variant="danger" /></div>
+        <div className="insight-action-list"><PageAction title="Отложить инсайт" leftAccessory={<WatchTimer className="insight-action-icon" />} onClick={() => onAction?.('snooze')} /><PageAction title="Отметить решённым" leftAccessory={<CheckmarkCircle className="insight-action-icon" />} onClick={() => onAction?.('resolve')} variant="danger" /></div>
         <div className="insight-feedback"><button type="button" aria-label="Копировать"><Copy /></button><button type="button" aria-label="Полезно"><ThumbsUp /></button><button type="button" aria-label="Не полезно"><ThumbsDown /></button></div>
         <div className="insight-dialog-input"><input placeholder="Спросить ИИ-Ассистента" /><button type="button" aria-label="Отправить"><Send /></button></div>
       </div>

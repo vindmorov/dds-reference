@@ -27,6 +27,8 @@ interface DropdownPopupProps {
   searchPlaceholder?: string;
   /** Колбэк при изменении поискового запроса */
   onSearchChange?: (q: string) => void;
+  /** Закрывает список после выбора пункта */
+  closeOnSelect?: boolean;
   /** Показывает спиннер вместо списка
    * @default false */
   isLoading?: boolean;
@@ -60,6 +62,7 @@ export const DropdownPopup: React.FC<DropdownPopupProps> = ({
     hasSearch = false,
     searchPlaceholder = 'Поиск',
     onSearchChange,
+    closeOnSelect = true,
     isLoading = false,
     isEmpty = false,
     emptyText = 'Ничего не найдено',
@@ -152,7 +155,7 @@ export const DropdownPopup: React.FC<DropdownPopupProps> = ({
             verticalPadding: 'none',
             titleClassName: 'ts-400-m',
             rightAccessory: isSelected ? checkmarkIcon : emptySlot,
-            onClick: originalOnClick ? () => { originalOnClick(); onClose(); } : onClose,
+            onClick: originalOnClick ? () => { originalOnClick(); if (closeOnSelect) onClose(); } : (closeOnSelect ? onClose : undefined),
         });
     });
 
